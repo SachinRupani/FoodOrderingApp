@@ -21,7 +21,6 @@ import {BottomBarCartView} from './components/bottomBarCartView/BottomBarCartVie
 import {useGetCartState} from './hooks/useGetCartState';
 import {EmptyData} from '../../common/components/emptyData/EmptyData';
 import {foodCartScreen} from '../../routes/ScreenNavRouteData';
-import {FoodCartType} from '../../data/local/foodCartData/FoodCartType';
 
 export const FoodListingScreen = (): JSX.Element => {
   const appTheme = useTheme();
@@ -171,12 +170,26 @@ export const FoodListingScreen = (): JSX.Element => {
     );
   };
 
+  /**
+   * Funtion to render error
+   */
+  const _renderFoodListError = (): JSX.Element => {
+    return (
+      <EmptyData
+        iconName="warning-outline"
+        strMessage="Some API error occurred"
+      />
+    );
+  };
+
   return (
     <SafeAreaView style={foodListingScreenStylesToUse.container}>
       {arrayDataFoodList.length > 0
         ? _renderMainContent()
         : isFoodListLoading
         ? _renderLoadingIndicator()
+        : foodListError
+        ? _renderFoodListError()
         : null}
     </SafeAreaView>
   );
