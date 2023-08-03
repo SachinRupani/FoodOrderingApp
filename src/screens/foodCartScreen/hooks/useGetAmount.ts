@@ -2,8 +2,13 @@ import {useEffect, useState} from 'react';
 import {FoodCartType} from '../../../data/local/foodCartData/FoodCartType';
 import {CalculatedAmountDataType} from '../data/CalculatedAmountDataType';
 
+/**
+ * Custom hook function to get the calculated amounts (before tax, after tax, tax percent and tax amount)
+ * @param foodCartData Cart amount data
+ * @returns calculated amounts (of type CalculatedAmountDataType)
+ */
 export const useGetAmount = (foodCartData: FoodCartType) => {
-  const [calculatedAmountData, setCaluclatedAmountData] =
+  const [calculatedAmountData, setCalculatedAmountData] =
     useState<CalculatedAmountDataType>({
       taxAmount: 0,
       totalAmountAfterTaxAdded: 0,
@@ -28,7 +33,7 @@ export const useGetAmount = (foodCartData: FoodCartType) => {
       calculatedTotalAmountBeforeTax + calculatedTaxAmount,
     );
 
-    setCaluclatedAmountData({
+    setCalculatedAmountData({
       taxAmount: calculatedTaxAmount,
       totalAmountBeforeTaxAdded: calculatedTotalAmountBeforeTax,
       totalAmountAfterTaxAdded: calculatedTotalAmountAfterTax,
